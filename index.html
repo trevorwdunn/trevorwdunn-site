@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trevor Dunn</title>
+  <meta name="description" content="Trevor Dunn - Technician, computer science student, and tech enthusiast based in Arlington, TX.">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0c0c0f;
+      --bg-raised: #14141a;
+      --bg-hover: #1c1c24;
+      --text: #e8e8ed;
+      --text-secondary: #9898a6;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-glow: rgba(99, 102, 241, 0.15);
+      --accent2: #06b6d4;
+      --accent2-glow: rgba(6, 182, 212, 0.12);
+      --border: #1e1e28;
+      --border-accent: #2a2a3a;
+      --gradient: linear-gradient(135deg, #6366f1, #06b6d4);
+      --max-w: 960px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      background: rgba(12, 12, 15, 0.8);
+    }
+    nav .inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .name {
+      font-weight: 700;
+      font-size: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    nav .links { display: flex; gap: 1.5rem; }
+    nav .links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--text); }
+
+    /* MAIN */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 5rem 0 4rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -200px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -150px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent2-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; flex: 1; }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .hero .subtitle span {
+      color: var(--accent-light);
+    }
+    .hero-photo {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-photo img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 15%;
+      border: 3px solid var(--border-accent);
+      box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(6, 182, 212, 0.06);
+    }
+
+    /* SECTIONS */
+    section { margin-bottom: 4rem; }
+    section:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+    .section-header h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-light);
+    }
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-accent);
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-hover);
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .card-date {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .card-org {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.6rem;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* TWO-COLUMN GRID */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+    .skill-tag {
+      font-size: 0.82rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .skill-tag:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* CONTACT */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .contact-link svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-light);
+    }
+
+    /* FOOTER */
+    footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Subtle gradient line */
+    .gradient-line {
+      height: 2px;
+      background: var(--gradient);
+      border-radius: 1px;
+      opacity: 0.4;
+    }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      nav .inner { padding: 0.75rem 1rem; }
+      nav .links { gap: 1rem; }
+      nav .links a { font-size: 0.78rem; }
+
+      main { padding: 0 1rem 3rem; }
+
+      .hero {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 2.5rem 0 2rem;
+      }
+      .hero::before, .hero::after { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .hero .subtitle { font-size: 1rem; max-width: 100%; }
+      .hero-photo img { width: 100px; height: 100px; }
+
+      .grid-2 { grid-template-columns: 1fr; }
+
+      .skills-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+
+      .contact-row { flex-wrap: wrap; gap: 0.75rem; }
+      .contact-link { font-size: 0.9rem; padding: 0.6rem 1.1rem; }
+
+      section { margin-bottom: 2.5rem; }
+      .section-header { margin-bottom: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="name">Trevor Dunn</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="about">
+    <div class="hero-text">
+      <h1>Trevor Dunn</h1>
+      <p class="subtitle">Technician and <span>computer science student</span> based in Arlington, TX. Building things with technology and always learning.</p>
+    </div>
+    <div class="hero-photo">
+      <img src="pfp.webp" alt="Trevor Dunn">
+    </div>
+  </section>
+
+  <div class="gradient-line"></div>
+
+  <section id="experience" style="margin-top: 3rem;">
+    <div class="section-header"><h2>Experience</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Technician</span>
+          <span class="card-date">Apr 2020 &#8211; Present</span>
+        </div>
+        <div class="card-org">Bdunn &amp; Company, Arlington</div>
+        <p class="card-desc">
+          Set up workstations, firewalls, switches, and wireless access points. Coordinated with ISPs to establish internet access in new buildings. Provided general tech support across client locations and handled equipment logistics.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Ministry Support Assistant</span>
+          <span class="card-date">Apr 2021 &#8211; Oct 2021</span>
+        </div>
+        <div class="card-org">First Baptist Church, Arlington</div>
+        <p class="card-desc">
+          General ministry assistance including event setup, basic facilities upkeep, and various tasks spanning custodial and maintenance responsibilities.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-header"><h2>Education</h2></div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Associate of Arts, Computer Science</span>
+        <span class="card-date">Jun 2021 &#8211; Jul 2025</span>
+      </div>
+      <div class="card-org">Tarrant County College, Hurst</div>
+      <p class="card-desc">
+        Pursued an Associate of Arts with a focus in Computer Science. Planning to transfer to UTA for a Bachelor&#8217;s in Computer Science. Member of the Phi Theta Kappa Honor Society.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header"><h2>Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-tag">Computer Repair</div>
+      <div class="skill-tag">Networking</div>
+      <div class="skill-tag">Tech Support</div>
+      <div class="skill-tag">Windows</div>
+      <div class="skill-tag">macOS</div>
+      <div class="skill-tag">Linux</div>
+      <div class="skill-tag">iOS</div>
+      <div class="skill-tag">ChromeOS</div>
+      <div class="skill-tag">English</div>
+      <div class="skill-tag">Some Spanish</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-header"><h2>Contact</h2></div>
+    <div class="contact-row">
+      <a href="mailto:trevor@bdunn.com" class="contact-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        trevor@bdunn.com
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &#169; 2026 Trevor Dunn
+</footer>
+
+</body>
+</html>
